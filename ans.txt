@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Student {
+public int token ;
+public String name;
+public double grade;
+public Student(int x, String y, double z) 
+{
+this.token = x;
+this.name = y;
+this.grade = z;
+}
+}
+class MaxComparator implements Comparator<Student>
+{
+public int compare(Student s1,Student s2)
+{
+if(s1.grade!=s2.grade )
+{
+if(s1.grade>s2.grade)
+{
+return -1;
+}
+else
+return 1; 						
+}
+if((s1.name).equals(s2.name)==false)
+{
+return (s1.name).compareTo(s2.name);						
+}
+else
+return (s1.token)-(s2.token);	
+}
+}
+public class Solution {
+	public static void main(String[] args)
+	{
+	int t=0;
+	Scanner s=new Scanner(System.in);
+	t=s.nextInt();
+	MaxComparator abc=new MaxComparator();
+	PriorityQueue<Student> pq=new PriorityQueue<>(abc);
+	for(int i=0;i<t;i++)
+	{
+	String event = s.next();
+	if(event.equals("ENTER")) 
+	{
+	String name = s.next();
+	double cgpa = s.nextDouble();
+	int token = s.nextInt();
+	Student student = new Student(token, name, cgpa);
+	pq.add(student);
+	}
+	else
+	{ 
+	if(event.equals("SERVED"))
+	{
+	pq.remove(); 	
+	}
+	}
+	}
+	if(pq.isEmpty()==true)
+	System.out.print("EMPTY");
+	else
+	{
+	while(pq.isEmpty()==false)
+	{
+	Student su=pq.remove();
+	System.out.println(su.name);
+	}
+	}
+	s.close();
+	}
+}
+							
